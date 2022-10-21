@@ -133,3 +133,4 @@ dmypy.json
 /in
 /out
 haarcascade_frontalface_alt2.xml
+.DS_Store

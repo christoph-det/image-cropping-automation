@@ -4,6 +4,7 @@ import os
 import ftplib
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
 FTP_HOST = os.getenv('FTP_HOST')
@@ -40,6 +41,9 @@ for (img, filename) in zip(imgs, filenames):
 
     img_height = img.shape[0]
     img_width = img.shape[1]
+
+    if len(faces) == 0:
+        print("No faces found in image " + filename)
 
     # Draw rectangle around the faces and crop the faces
     for (x, y, w, h) in faces:
