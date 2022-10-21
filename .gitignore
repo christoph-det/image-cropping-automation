@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# specific files
+
+/in
+/out
+haarcascade_frontalface_alt2.xml
