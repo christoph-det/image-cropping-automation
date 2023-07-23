@@ -55,8 +55,22 @@ for (img, filename) in zip(imgs, filenames):
             y = 0
         if (x < 0):
             x = 0
+        # make image square
+        if x > y:
+            y = x
+        elif y > x:
+            x = y
+        # find face
         size = min(h, w, img_height, img_width)
         faces = img[y:y + size, x:x + size]
+        # scale to 600px
+        desired_image_size = 600
+        scale_percent = desired_image_size / size
+        dimensions = (int((y + size) * scale_percent), int((x + size) * scale_percent))
+        # choose better interpolation depending on shrinking or enlarging img
+        interpolation_choice = cv2.INTER_AREA if scale_percent < 1  else cv2.INTER_CUBIC
+        faces = cv2.resize(faces, dimensions, interpolation=interpolation_choice)
+        # save
         cv2.imwrite('out/' + filename, faces)
         with open("out/" + filename, "rb") as file:
             ftp.storbinary(f"STOR {filename}", file)
